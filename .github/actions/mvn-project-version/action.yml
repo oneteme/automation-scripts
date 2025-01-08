@@ -7,4 +7,4 @@ runs:
   steps:
     - name: extract project.version tag content
       shell: bash
-      run: echo "version=$(mvn help:evaluate -DforceStdout -Dexpression=project.version -q)" >>$GITHUB_OUTPUT
+      run: echo "version=$(mvn help:evaluate -DforceStdout -Dexpression=project.version -q)" >> $GITHUB_OUTPUT
