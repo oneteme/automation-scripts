@@ -4,19 +4,19 @@ branding:
   color: green
 inputs:
   host:
-    description: sonar.host.url 
+    description: "sonar.host.url" 
     required: false
-    default: https://sonarcloud.io
+    default: "https://sonarcloud.io"
   organization:
-    description: sonar.organization
+    description: "sonar.organization"
     required: false
-    default: jarvis
+    default: "jarvis"
   project:
-    description: sonar.projectKey
+    description: "sonar.projectKey"
     required: false
-    default: ${{ github.repository_owner }}_${{ github.event.repository.name }}
+    default: "${{ github.repository_owner }}_${{ github.event.repository.name }}"
   version:
-    description: maven plugin version
+    description: "maven plugin version"
     required: false
     default: 4.0.0.4121
 runs:
