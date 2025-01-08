@@ -1,4 +1,4 @@
-name: Java code source scan with SonarQube
+name: release notes
 branding:
   icon: bookmark
   color: green
@@ -10,4 +10,5 @@ runs:
   using: "composite"
   steps:
     - name: create release
-      run: gh release create "$version" --repo="$GITHUB_REPOSITORY" --target="${{ github.ref_name }}" --title="v${{ inputs.version }}" --generate-notes
+      run: gh release create "v${{ inputs.version }}" --repo="${{ github.repository }}" --target="${{ github.ref_name }}" --title="v${{ inputs.version }}" --generate-notes
+      shell: bash
