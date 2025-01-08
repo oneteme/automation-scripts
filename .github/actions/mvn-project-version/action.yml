@@ -1,11 +1,7 @@
 name: Extract project version
-inputs:
-  profile:
-    description: "maven profile"
-    required: false
 runs:
   using: "composite"
   steps:
     - name: extract version
       shell: bash
-      run: echo "version=$(mvn help:evaluate -DforceStdout -Dexpression=project.version -q)" >>$GITHUB_OUTPUT
+      run: echo "version=$(mvn help:evaluate -DforceStdout -Dexpression=project.version -q)" >> $GITHUB_OUTPUT
