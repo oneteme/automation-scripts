@@ -5,6 +5,6 @@ outputs:
 runs:
   using: "composite"
   steps:
-    - name: extract project.version tag content
+    - name: "extract project.version tag content"
       shell: bash
       run: echo "version=$(mvn help:evaluate -DforceStdout -Dexpression=project.version -q)" >> $GITHUB_OUTPUT
