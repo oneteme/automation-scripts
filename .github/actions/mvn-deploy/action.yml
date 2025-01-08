@@ -1,0 +1,16 @@
+name: Deploy project 
+branding:
+  icon: check
+  color: green
+inputs:
+  profile:
+    description: "maven profile"
+    required: false
+runs:
+  using: "composite"
+  steps:
+    - name: Build and scan source code
+      shell: bash
+      run: mvn --batch-mode --no-transfer-progress ${{ inputs.version && format('-P{0}', inputs.version) || '' }} deploy 
+      #env:
+        #SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
