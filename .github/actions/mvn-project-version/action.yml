@@ -2,6 +2,6 @@ name: Extract project version
 runs:
   using: "composite"
   steps:
-    - name: extract version
+    - name: extract pom version
       shell: bash
       run: echo "version=$(mvn help:evaluate -DforceStdout -Dexpression=project.version -q)" >> $GITHUB_OUTPUT
