@@ -1,8 +1,8 @@
 name: Extract project version
+outputs:
+  version: "project version"
 runs:
   using: "composite"
-  outputs:
-    version: "project version"
   steps:
     - name: extract project.version content
       shell: bash
