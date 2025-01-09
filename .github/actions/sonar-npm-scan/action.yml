@@ -6,7 +6,7 @@ inputs:
     default: "oneteme"
   package:
     discription: "package name"
-    required: true
+    required: false
 runs:
   using: "composite"
   steps:
@@ -15,5 +15,5 @@ runs:
     run: npm install
   - name: build project
     shell: bash
-    run: npm run build "@${{ inputs.organization }}/${{ inputs.package }}"
+    run: npm run build ${{ inputs.package && format('@{0}/{1}', inputs.organization, inputs.package) || '' }}
   - uses: SonarSource/sonarqube-scan-action@v4.2.1
