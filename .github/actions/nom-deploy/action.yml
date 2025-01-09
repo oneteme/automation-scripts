@@ -1,0 +1,12 @@
+name: Deploy project
+inputs:
+  profile:
+    dist: "output bin folder path"
+    required: false
+    default: "./dist"
+runs:
+  using: "composite"
+  steps:
+  - name: deploy
+    shell: bash
+    run: npm publish ${{ inputs.dist }} --access public
