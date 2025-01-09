@@ -21,6 +21,6 @@ runs:
   steps:
   - name: Build and scan source code
     shell: bash
-    run: mvn --batch-mode --no-transfer-progress verify org.sonarsource.scanner.maven:sonar-maven-plugin:4.0.0.4121:sonar -Dsonar.projectKey=${{ inputs.project }} -Dsonar.organization=${{ inputs.organization }} -Dsonar.host.url=${{ inputs.host }}
+    run: mvn --batch-mode --no-transfer-progress verify org.sonarsource.scanner.maven:sonar-maven-plugin:${{ inputs.version }}:sonar -Dsonar.projectKey=${{ inputs.project }} -Dsonar.organization=${{ inputs.organization }} -Dsonar.host.url=${{ inputs.host }}
     #env:
       #SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
