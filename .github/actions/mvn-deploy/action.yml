@@ -9,6 +9,6 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: Build and scan source code
-      shell: bash
-      run: mvn --batch-mode --no-transfer-progress ${{ inputs.version && format('-P{0}', inputs.version) || '' }} deploy
+  - name: Build and scan source code
+    shell: bash
+    run: mvn --batch-mode --no-transfer-progress ${{ inputs.version && format('-P{0}', inputs.version) || '' }} deploy
