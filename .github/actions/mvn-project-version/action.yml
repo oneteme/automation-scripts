@@ -2,13 +2,11 @@ name: Extract project version
 outputs:
   version:
     description: "project version"
+    value: ${{ steps.extract.outputs.version }}
 runs:
   using: "composite"
   steps:
   - name: "extract project.version tag content"
     shell: bash
-    id: testVer
+    id: extract
     run: echo "version=$(mvn help:evaluate -DforceStdout -Dexpression=project.version -q)" >> $GITHUB_OUTPUT
-  - name: "test"
-    shell: bash
-    run: echo "version ${{ steps.testVer.outputs.version }}"
