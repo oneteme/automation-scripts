@@ -1,6 +1,6 @@
 name: Extract project version
 outputs:
-  version: 
+  version:
     description: "project version"
 runs:
   using: "composite"
