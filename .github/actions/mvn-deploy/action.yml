@@ -1,7 +1,4 @@
 name: Deploy project 
-branding:
-  icon: check
-  color: green
 inputs:
   profile:
     description: "maven profile"
