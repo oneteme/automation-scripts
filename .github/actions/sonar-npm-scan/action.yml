@@ -1,0 +1,19 @@
+name: Deploy project
+inputs:
+  organization:
+    description: "npm organization"
+    required: false
+    default: "oneteme"
+  package:
+    discription: "package name"
+    required: true
+runs:
+  using: "composite"
+  steps:
+  - name: install dependencies
+    shell: bash
+    run: npm install
+  - name: build project
+    shell: bash
+    run: npm run build "@${{ inputs.organization }}/${{ inputs.package }}"
+  - uses: SonarSource/sonarqube-scan-action@v4.2.1
