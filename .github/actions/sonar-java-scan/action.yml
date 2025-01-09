@@ -1,7 +1,4 @@
 name: Java code source scan with SonarQube
-branding:
-  icon: check
-  color: green
 inputs:
   host:
     description: "sonar.host.url" 
@@ -22,8 +19,8 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: Build and scan source code
-      shell: bash
-      run: mvn --batch-mode --no-transfer-progress verify org.sonarsource.scanner.maven:sonar-maven-plugin:4.0.0.4121:sonar -Dsonar.projectKey=${{ inputs.project }} -Dsonar.organization=${{ inputs.organization }} -Dsonar.host.url=${{ inputs.host }}
-      #env:
-        #SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+  - name: Build and scan source code
+    shell: bash
+    run: mvn --batch-mode --no-transfer-progress verify org.sonarsource.scanner.maven:sonar-maven-plugin:4.0.0.4121:sonar -Dsonar.projectKey=${{ inputs.project }} -Dsonar.organization=${{ inputs.organization }} -Dsonar.host.url=${{ inputs.host }}
+    #env:
+      #SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
