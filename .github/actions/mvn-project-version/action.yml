@@ -10,4 +10,5 @@ runs:
     id: testVer
     run: echo "version=$(mvn help:evaluate -DforceStdout -Dexpression=project.version -q)" >> $GITHUB_OUTPUT
   - name: "test"
+    shell: bash
     run: echo "version ${{ steps.testVer.outputs.version }}"
