@@ -1,12 +1,25 @@
 name: Deploy project
 inputs:
-  profile:
-    dist: "output bin folder path"
+  organization:
+    description: "npm organization"
+    required: false
+    default: "oneteme"
+  dist:
+    discription: "output bin folder path"
     required: false
     default: "./dist"
+  package:
+    discription: "package name"
+    required: true
 runs:
   using: "composite"
   steps:
-  - name: deploy
+  - name: install dependencies
     shell: bash
-    run: npm publish ${{ inputs.dist }} --access public
+    run: npm install
+  - name: build project
+    shell: bash
+    run: npm run build "@${{ inputs.organization }}/${{ inputs.package }}"
+  - name: deploy package
+    shell: bash
+    run: npm publish "${{ inputs.dist }}/${{ inputs.organization }}/${{ inputs.package }}" --access public
