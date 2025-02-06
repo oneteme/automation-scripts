@@ -1,0 +1,10 @@
+name: Build and Compile NPM Project
+runs:
+  using: "composite"
+  steps:
+  - name: Install Project Dependencies
+    shell: bash
+    run: npm install
+  - name: Build Project
+    shell: bash
+    run: npm run build #-- --key=value

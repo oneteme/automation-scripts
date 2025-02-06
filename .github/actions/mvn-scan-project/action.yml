@@ -1,0 +1,11 @@
+name: Analyze Source Code with SonarQube
+runs:
+  using: "composite"
+  steps:
+  - name: Build and Analyze Source Code
+    shell: bash
+    run: |
+      mvn --batch-mode --no-transfer-progress verify org.sonarsource.scanner.maven:sonar-maven-plugin:4.0.0.4121:sonar \
+      -Dsonar.organization=${{ github.repository_owner }} \
+      -Dsonar.projectKey="${{ github.repository_owner }}_${{ github.event.repository.name }}" \
+      -Dsonar.host.url="https://sonarcloud.io"

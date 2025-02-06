@@ -1,9 +1,4 @@
-name: Extract project version
-inputs:
-  path:
-    description: "package.json file path" 
-    required: false
-    default: "./package.json"
+name: Extract Project Version
 outputs:
   version:
     description: "project version"
@@ -11,7 +6,7 @@ outputs:
 runs:
   using: "composite"
   steps:
-  - name: "extract project.version attrib content"
+  - name: "Extract project.version attrib content"
     shell: bash
     id: extract
-    run: echo "version=$(node -p 'require("${{ inputs.path }}").version')" >> $GITHUB_OUTPUT
+    run: echo "version=$(node -p 'require("./package.json").version')" >> $GITHUB_OUTPUT

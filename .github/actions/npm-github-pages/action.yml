@@ -1,19 +1,13 @@
-name: npm github pages
+name: npm GitHub Pages
 inputs:
-  app-name:
-    description: "application name"
+  project:
+    description: "The name of the project to be deployed to GitHub Pages"
     required: true
 runs:
   using: "composite"
   steps:
-  - name: install dependencies
-    shell: bash
-    run: npm install
-  - name: build project
-    shell: bash
-    run: npm run build -- --base-href ${{ inputs.app-name }}
   - uses: actions/configure-pages@v5
   - uses: actions/upload-pages-artifact@v3
     with:
-      path: './dist/${{ inputs.app-name }}'
+      path: './dist/${{ inputs.project }}'
   - uses: actions/deploy-pages@v4

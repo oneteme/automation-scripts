@@ -1,0 +1,11 @@
+name: Deploy NPM Project
+inputs:
+  project:
+    description: "The name of the project to be deployed" #library
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - name: Publish NPM Package
+      shell: bash
+      run: npm publish "./dist/${{ github.repository_owner }}/${{ inputs.project }}" --access public

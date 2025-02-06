@@ -1,0 +1,16 @@
+name: Create GitHub Release with Auto-Generated Notes
+inputs:
+  version:
+    description: "Version of the project to be released"
+    required: true
+runs:
+  using: "composite"
+  steps:
+  - name: Generate and Publish GitHub Release
+    shell: bash
+    run: |
+      gh release create "v${{ inputs.version }}" \
+        --repo="${{ github.repository }}" \
+        --target="${{ github.ref_name }}" \
+        --title="v${{ inputs.version }}" \
+        --generate-notes

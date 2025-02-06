@@ -1,0 +1,10 @@
+name: Project code source scan with SonarQube
+runs:
+  using: "composite"
+  steps:
+  - uses: SonarSource/sonarqube-scan-action@v4.2.1
+    with:
+      args: >
+        -Dsonar.organization=${{ inputs.repository_owner }}
+        -Dsonar.projectKey="${{ github.repository_owner }}_${{ github.event.repository.name }}"
+        -Dsonar.host.url="https://sonarcloud.io"

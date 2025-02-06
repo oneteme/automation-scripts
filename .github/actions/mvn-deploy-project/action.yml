@@ -1,0 +1,11 @@
+name: Maven Project Deployment
+inputs:
+  profile:
+    description: "Maven profile to use for deployment"
+    required: false
+runs:
+  using: "composite"
+  steps:
+  - name: Deploy project
+    shell: bash
+    run: mvn --batch-mode --no-transfer-progress ${{ inputs.profile && format('-P{0}', inputs.profile) || '' }} deploy
