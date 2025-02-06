@@ -1,0 +1,16 @@
+name: npm github pages
+inputs:
+  app-name:
+    description: "application name"
+    required: true
+runs:
+  using: "composite"
+  steps:
+  - uses: actions/setup-node@v4
+  - run: npm install
+  - run: npm run build -- --base-href ${{ inputs.app-name }}
+  - uses: actions/configure-pages@v5
+  - uses: actions/upload-pages-artifact@v3
+    with:
+      path: './dist/${{ inputs.app-name }}'
+  - uses: actions/deploy-pages@v4
