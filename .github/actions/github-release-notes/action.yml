@@ -21,9 +21,10 @@ runs:
         echo "release_exists=false" >> $GITHUB_ENV
       fi
   - name: Delete existing draft release
+    shell: bash
     if: env.release_exists == 'true'
     run: |
-      gh release delete "v${{ inputs.version }}" -y  --repo="${{ github.repository }}" \
+      gh release delete "v${{ inputs.version }}" -y 
   - name: Generate and Publish GitHub Release
     shell: bash
     run: |
