@@ -11,22 +11,19 @@ inputs:
 runs:
   using: "composite"
   steps:
-  - name: Check if draft release exists
-    id: check_release
+  - name: Check for existing draft release
     shell: bash
     run: |
-      res=$(gh release list \
-      --repo="${{ github.repository }}" \
-      --json name,isDraft --jq '.[] | select(.name == "v${{ inputs.version }}" and .isDraft == true)')
-      echo "exists=$([[ -n \"${res}\" ]] && echo true || echo false)" >> $GITHUB_ENV
-      echo "${{ env.exists }} : ${res}"
-  - name: cleanup release
-    shell: bash
-    if: ${{ env.exists == true }}
+      set -e
+      if gh release view "v${{ inputs.version }}" --json draft --jq '.draft' | grep true; then
+        echo "release_exists=true" >> $GITHUB_ENV
+      else
+        echo "release_exists=false" >> $GITHUB_ENV
+      fi
+  - name: Delete existing draft release
+    if: env.release_exists == 'true'
     run: |
-      gh release delete -y \
-        --repo="${{ github.repository }}" \
-        --cleanup-tag "v${{ inputs.version }}"
+      gh release delete "v${{ inputs.version }}" -y  --repo="${{ github.repository }}" \
   - name: Generate and Publish GitHub Release
     shell: bash
     run: |
