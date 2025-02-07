@@ -18,10 +18,11 @@ runs:
       res=$(gh release list \
       --repo="${{ github.repository }}" \
       --json name,isDraft --jq '.[] | select(.name == "v${{ inputs.version }}" and .isDraft == true)')
-      echo 'exits=$([ -n "${res}" ] && echo true || echo false)' >> $GITHUB_ENV
+      echo 'exists=$([ -n "${res}" ] && echo true || echo false)' >> $GITHUB_ENV
+      echo ${res}
   - name: cleanup release
     shell: bash
-    if: ${{ env.exits }}
+    if: ${{ env.exists }}
     run: |
       gh release delete -y \
         --repo="${{ github.repository }}" \
