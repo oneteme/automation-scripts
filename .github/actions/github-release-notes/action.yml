@@ -3,6 +3,11 @@ inputs:
   version:
     description: "Version of the project to be released"
     required: true
+  draft:
+    description: "Indicates if the release is a draft"
+    type: boolean
+    required: false
+    default: false
 runs:
   using: "composite"
   steps:
@@ -10,6 +15,7 @@ runs:
     shell: bash
     run: |
       gh release create "v${{ inputs.version }}" \
+        ${{ inputs.draft && '--draft' }}
         --repo="${{ github.repository }}" \
         --target="${{ github.ref_name }}" \
         --title="v${{ inputs.version }}" \
