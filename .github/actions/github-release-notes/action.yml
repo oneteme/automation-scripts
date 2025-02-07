@@ -15,7 +15,7 @@ runs:
     shell: bash
     run: |
       set -e
-      if gh release view "v${{ inputs.version }}" --json isDraft --jq '.isDraft' | grep true; then
+      if gh release view "v${{ inputs.version }}" --repo="${{ github.repository }}" --json isDraft --jq '.isDraft' | grep true; then
         echo "release_exists=true" >> $GITHUB_ENV
       else
         echo "release_exists=false" >> $GITHUB_ENV
