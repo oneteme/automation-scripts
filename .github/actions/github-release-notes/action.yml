@@ -14,7 +14,10 @@ runs:
   - name: cleanup release
     shell: bash
     if: ${{ inputs.draft }}
-    run: gh release delete -y --cleanup-tag "v${{ inputs.version }}"
+    run: |
+      gh release delete -y \
+        --repo="${{ github.repository }}" \
+        --cleanup-tag "v${{ inputs.version }}"
   - name: Generate and Publish GitHub Release
     shell: bash
     run: |
