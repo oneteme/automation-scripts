@@ -11,13 +11,19 @@ inputs:
 runs:
   using: "composite"
   steps:
-  - name: cleanup release
+   - name: Check if draft release exists
+    id: check_release
     shell: bash
-    if: ${{ inputs.draft }}
     run: |
-      gh release delete -y \
-        --repo="${{ github.repository }}" \
-        --cleanup-tag "v${{ inputs.version }}"
+      release_info=$(gh release view "v${{ inputs.version }}" --repo="${{ github.repository }}" --json draft -q .draft)
+      echo $release_info
+  # - name: cleanup release
+  #   shell: bash
+  #   if: ${{ inputs.draft && env.release_exists == 'true' }}
+  #   run: |
+  #     gh release delete -y \
+  #       --repo="${{ github.repository }}" \
+  #       --cleanup-tag "v${{ inputs.version }}"
   - name: Generate and Publish GitHub Release
     shell: bash
     run: |
