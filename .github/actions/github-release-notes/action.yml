@@ -14,7 +14,6 @@ runs:
   - name: Check for existing draft release
     shell: bash
     run: |
-      set -e
       if gh release view "v${{ inputs.version }}" --repo="${{ github.repository }}" --json isDraft --jq '.isDraft' | grep true; then
         echo "release_exists=true" >> $GITHUB_ENV
       else
@@ -23,8 +22,7 @@ runs:
   - name: Delete existing draft release
     shell: bash
     if: env.release_exists == 'true'
-    run: |
-      gh release delete "v${{ inputs.version }}" -y  --repo="${{ github.repository }}" 
+    run: gh release delete "v${{ inputs.version }}" -y --repo="${{ github.repository }}" 
   - name: Generate and Publish GitHub Release
     shell: bash
     run: |
