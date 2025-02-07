@@ -15,8 +15,8 @@ runs:
     shell: bash
     run: |
       gh release create "v${{ inputs.version }}" \
-        ${{ inputs.draft && '--draft' }}
         --repo="${{ github.repository }}" \
         --target="${{ github.ref_name }}" \
         --title="v${{ inputs.version }}" \
         --generate-notes
+        ${{ inputs.draft && '--draft' }}
