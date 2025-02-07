@@ -19,7 +19,7 @@ runs:
       --repo="${{ github.repository }}" \
       --json name,isDraft --jq '.[] | select(.name == "v${{ inputs.version }}" and .isDraft == true)')
       echo 'exists=$([ -n "${res}" ] && echo true || echo false)' >> $GITHUB_ENV
-      echo ${res}
+      echo '${{ env.exists }} : ${res}'
   - name: cleanup release
     shell: bash
     if: ${{ env.exists }}
