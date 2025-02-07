@@ -15,9 +15,9 @@ runs:
     id: check_release
     shell: bash
     run: |
-      gh release list \
+      list=$(gh release list \
       --repo="${{ github.repository }}" \
-      --json name --jq '.[] | select(.name == "v${{ inputs.version }}") | .isDraft'
+      --json name --jq '.[] | select(.name == "v${{ inputs.version }}") | .isDraft')
   # - name: cleanup release
   #   shell: bash
   #   if: ${{ inputs.draft && env.release_exists == 'true' }}
