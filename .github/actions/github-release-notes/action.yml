@@ -15,17 +15,17 @@ runs:
     id: check_release
     shell: bash
     run: |
-      list=$(gh release list \
+      res=$(gh release list \
       --repo="${{ github.repository }}" \
       --json name,isDraft --jq '.[] | select(.name == "v${{ inputs.version }}" and .isDraft == true)')
-      echo $list
-  # - name: cleanup release
-  #   shell: bash
-  #   if: ${{ inputs.draft && env.release_exists == 'true' }}
-  #   run: |
-  #     gh release delete -y \
-  #       --repo="${{ github.repository }}" \
-  #       --cleanup-tag "v${{ inputs.version }}"
+      echo 'exits=$([ -n "${res}" ] && echo true || echo false)' >> $GITHUB_ENV
+  - name: cleanup release
+    shell: bash
+    if: ${{ env.exits }}
+    run: |
+      gh release delete -y \
+        --repo="${{ github.repository }}" \
+        --cleanup-tag "v${{ inputs.version }}"
   - name: Generate and Publish GitHub Release
     shell: bash
     run: |
