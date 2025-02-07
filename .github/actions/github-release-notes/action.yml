@@ -18,4 +18,5 @@ runs:
         --repo="${{ github.repository }}" \
         --target="${{ github.ref_name }}" \
         --title="v${{ inputs.version }}" \
-        ${{ inputs.draft && '--draft' || '--generate-notes' }}
+        --generate-notes \
+        ${{ inputs.draft && '--draft' }}
