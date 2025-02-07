@@ -18,6 +18,7 @@ runs:
       list=$(gh release list \
       --repo="${{ github.repository }}" \
       --json name --jq '.[] | select(.name == "v${{ inputs.version }}") | .isDraft')
+      echo $list
   # - name: cleanup release
   #   shell: bash
   #   if: ${{ inputs.draft && env.release_exists == 'true' }}
