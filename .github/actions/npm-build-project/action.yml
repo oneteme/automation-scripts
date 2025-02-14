@@ -1,4 +1,8 @@
-name: Build and Compile NPM Project
+name: Build NPM Project
+inputs:
+  args:
+    description: "npm build arguments"
+    required: false
 runs:
   using: "composite"
   steps:
@@ -7,4 +11,4 @@ runs:
     run: npm install
   - name: Build Project
     shell: bash
-    run: npm run build #-- --key=value
+    run: npm run build ${{ inputs.args && format('-- P{0}', inputs.args) }} #-- --key=value
