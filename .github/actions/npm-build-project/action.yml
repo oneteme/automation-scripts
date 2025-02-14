@@ -1,7 +1,7 @@
 name: Build NPM Project
 inputs:
-  args:
-    description: "npm build arguments"
+  base-href:
+    description: "HTML base href"
     required: false
 runs:
   using: "composite"
@@ -11,4 +11,4 @@ runs:
     run: npm install
   - name: Build Project
     shell: bash
-    run: npm run build ${{ inputs.args && format('-- P{0}', inputs.args) }} #-- --key=value
+    run: npm run build ${{ inputs.base-href && format('-- P{0}', inputs.base-href) }} #-- --key=value
