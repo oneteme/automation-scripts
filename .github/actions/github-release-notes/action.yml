@@ -31,4 +31,4 @@ runs:
         --target="${{ github.ref_name }}" \
         --title="v${{ inputs.version }}" \
         --generate-notes \
-        ${{ inputs.draft == 'true' && '--draft' }}
+        ${{ inputs.draft == 'true' && '--draft' || '' }}
