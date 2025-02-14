@@ -11,4 +11,4 @@ runs:
     run: npm install
   - name: Build Project
     shell: bash
-    run: npm run build ${{ inputs.base-href && format('-- P{0}', inputs.base-href) }} #-- --key=value
+    run: npm run build ${{ inputs.base-href && format('-- {0}', inputs.base-href) }} #-- --key=value
