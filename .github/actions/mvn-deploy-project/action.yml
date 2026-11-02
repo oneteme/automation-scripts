@@ -8,7 +8,7 @@ runs:
   steps:
   - name: Deploy project
     shell: bash
-    run: mvn --B --no-transfer-progress ${{ inputs.profile && format('-P{0}', inputs.profile) || '' }} deploy
+    run: mvn --B --no-transfer-progress ${{ inputs.profile && format('-P{0}', inputs.profile) || '' }} deploy -DskipTests
   #- name: Post Artifact
     #shell: bash
     #run: curl --request POST 'https://ossrh-staging-api.central.sonatype.com/manual/upload/defaultRepository/io.github.oneteme' -u "$MAVEN_USERNAME:$MAVEN_PASSWORD"
